@@ -113,8 +113,8 @@ pub fn generate_keys(_key_len: usize) -> (PublicKey, PrivateKey) {
     (public_key, private_key)
 
     /*
+        // my ~20 years old sample
         #include "flintpp.h"
-        // C library: https://flintlib.org/
 
         int nKeyLen=1024; // kalit uzunligi
         DWORD t1=GetTickCount();
