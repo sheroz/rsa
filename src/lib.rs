@@ -39,26 +39,29 @@ pub fn generate_keys() -> (PublicKey, PrivateKey) {
         // 1. Choose two distinct primes p and q
         let p = BigInt::from(61);
         let q = BigInt::from(53);
-    
+
         // 2. Compute the modulus, n = pq
         // n = 61 * 53 = 3233
-        let n = p * q;
+        let n = p.clone() * q.clone();
         assert_eq!(n, BigInt::from(3233));
     
         // 3. Compute the totient function, https://en.wikipedia.org/wiki/Carmichael_function 
         // of the product as λ(n) = lcm(p − 1, q − 1),
         // least common multiple, lcm: https://en.wikipedia.org/wiki/Least_common_multiple
         // λ(3233) = lcm(60,52) = 780
-        let _lcm = 780;
+        let totient = num::integer::lcm(p-1, q-1);
+        assert_eq!(totient, BigInt::from(780));
     
         // 4. Choose any number 1 < e < 780 that is coprime to 780.
         // Choosing a prime number for e leaves us only to check that e is not a divisor of 780. 
         let e = 17;
+        assert_eq!(num::integer::gcd(BigInt::from(e), totient), BigInt::from(1));
     
         // 5. Compute d, the modular multiplicative inverse of e (mod λ(n)), yielding
         // modular multiplicative inverse: https://en.wikipedia.org/wiki/Modular_multiplicative_inverse
         // 1 = (17 * 413) mod 780
         let d = 413;
+        assert_eq!(d, 413);
     
         // 6. public key is (e = 17, n = 3233)
         let public_key = PublicKey { e, n: n.clone()};
