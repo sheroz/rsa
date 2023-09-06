@@ -10,13 +10,15 @@ use num::BigInt;
     Key generation
     1. Choose two distinct primes p and q
     2. Compute the modulus, n = p * q
-    3. Compute the totient φ(n) = (p − 1) * (q − 1)
+    3. Compute the totient, φ(n) = (p − 1) * (q − 1)
     4. Choose an integer e
         1 < e < φ(n) and gcd(φ(n), e) = 1
     5. Compute d, the modular multiplicative inverse of e (mod φ(n))
-        d = e−1 mod φ(n) or 1 = (d * e) mod φ(n)
-    6. Public Key = (e, n)
-    7. Private Key = (d, n)
+        d = (e ^ −1) mod φ(n)
+        or
+        1 = (d * e) mod φ(n)
+    6. Public key = (e, n)
+    7. Private key = (d, n)
     8. Encryption of plaintext message, m
         c = (m ^ e) mod n 
     9. Decryption of ciphertext, c
