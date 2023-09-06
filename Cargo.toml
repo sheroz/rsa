@@ -7,3 +7,6 @@ edition = "2021"
 
 [dependencies]
 num = "0.4"
+openssl-sys = "0.9"
+openssl = "0.10"
+rug = "1.21"
