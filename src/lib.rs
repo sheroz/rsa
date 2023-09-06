@@ -2,7 +2,6 @@
 // https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf#page=62
 
 // RSA: https://engineering.purdue.edu/kak/compsec/NewLectures/Lecture12.pdf
-// https://asecuritysite.com/rust/rsa01
 // https://blog.cloudflare.com/searching-for-the-prime-suspect-how-heartbleed-leaked-private-keys/
 // https://www.lightbluetouchpaper.org/2014/04/25/heartbleed-and-rsa-private-keys/
 
@@ -348,10 +347,12 @@ mod tests {
         let m = BigInt::from(65);
 
         // encryption
-        let cm = encrypt(&m, &public_key);
+        let c = encrypt(&m, &public_key);
+        assert_eq!(c.to_string(), "2790");
 
         // decryption
-        let dm = decrypt(&cm, &private_key);
+        let dm = decrypt(&c, &private_key);
+        assert_eq!(dm.to_string(), "65");
 
         assert_eq!(m, dm);
     }
