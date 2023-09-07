@@ -3,7 +3,8 @@ mod tests {
 
     #[test]
     fn wiki_sample_rsa_num() {
-        use num::BigInt;
+        use num_bigint::BigInt;
+        use num_integer;
 
         struct PublicKey {
             e: u32,
@@ -26,13 +27,13 @@ mod tests {
 
         // 3. Compute the totient, t
         // λ(3233) = lcm(60, 52) = 780
-        let t = num::integer::lcm(p - 1, q - 1);
+        let t = num_integer::lcm(p - 1, q - 1);
         assert_eq!(t, BigInt::from(780));
 
         // 4. Choose any number 1 < e < t that is coprime to t
         // Choosing a prime number for e leaves us only to check that e is not a divisor of t
         let e = 17;
-        assert_eq!(num::integer::gcd(BigInt::from(e), t), BigInt::from(1));
+        assert_eq!(num_integer::gcd(BigInt::from(e), t), BigInt::from(1));
 
         // 5. Compute d
         // there is no modular multiplicative inverse function in num crate (!!!)
