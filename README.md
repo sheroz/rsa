@@ -21,20 +21,24 @@ Samples of RSA (Rivest–Shamir–Adleman) public-key cryptosystem implementatio
         φ(n) = (p − 1) * (q − 1)
 
         which outputs the amount of numbers that are coprime to n
-        
+
     - Carmichael function is recommended for modern RSA-based cryptosystems,
         also known as reduced totient function or
-        least universal exponent function: https://en.wikipedia.org/wiki/Carmichael_function
+        least universal exponent function:
+        https://en.wikipedia.org/wiki/Carmichael_function
 
         λ(n) = lcm(p − 1, q − 1)
 
-        where lcm() is the least common multiple: https://en.wikipedia.org/wiki/Least_common_multiple
+        where lcm() is the least common multiple:
+        https://en.wikipedia.org/wiki/Least_common_multiple
 
 4. Choose a public key exponent, integer e (usually 65537 = 0x010001)
     1 < e < t and gcd(t, e) = 1
 
 5. Compute the d, modular multiplicative inverse of e (mod t)
-    Modular multiplicative inverse: https://en.wikipedia.org/wiki/Modular_multiplicative_inverse
+    Modular multiplicative inverse:
+    https://en.wikipedia.org/wiki/Modular_multiplicative_inverse
+    
     d = (e ^ (−1)) mod t
     or 
     1 = (d * e) mod t
