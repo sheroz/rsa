@@ -9,22 +9,22 @@ use num::BigInt;
 use openssl::bn::BigNum;
 use rug::Integer;
 
-pub struct PublicKey {
+pub struct PublicKeyNum {
     e: u32,
     n: BigInt,
 }
 
-pub struct PrivateKey {
+pub struct PrivateKeyNum {
     d: u32,
     n: BigInt,
 }
 
-pub struct BnPublicKey {
+pub struct PublicKeyOpenSslBn {
     e: BigNum,
     n: BigNum,
 }
 
-pub struct BnPrivateKey {
+pub struct PrivateKeyOpenSslBn {
     d: BigNum,
     n: BigNum,
 }
@@ -39,7 +39,7 @@ pub struct PrivateKeyGmp {
     n: Integer,
 }
 
-pub fn generate_keys(_key_len: usize) -> (PublicKey, PrivateKey) {
+pub fn generate_keys(_key_len: usize) -> (PublicKeyNum, PrivateKeyNum) {
     // Key generation
     // https://datatracker.ietf.org/doc/html/rfc2313#section-6
 
@@ -71,10 +71,10 @@ pub fn generate_keys(_key_len: usize) -> (PublicKey, PrivateKey) {
     assert_eq!(d, 413);
 
     // 6. public key is (e = 17, n = 3233)
-    let public_key = PublicKey { e, n: n.clone() };
+    let public_key = PublicKeyNum { e, n: n.clone() };
 
     // 7. private key is (d = 413, n = 3233)
-    let private_key = PrivateKey { d, n: n.clone() };
+    let private_key = PrivateKeyNum { d, n: n.clone() };
 
     (public_key, private_key)
 
@@ -119,11 +119,11 @@ pub fn generate_keys(_key_len: usize) -> (PublicKey, PrivateKey) {
     */
 }
 
-pub fn encrypt(m: &BigInt, public_key: &PublicKey) -> BigInt {
+pub fn encrypt(m: &BigInt, public_key: &PublicKeyNum) -> BigInt {
     m.pow(public_key.e) % public_key.n.clone()
 }
 
-pub fn decrypt(c: &BigInt, private_key: &PrivateKey) -> BigInt {
+pub fn decrypt(c: &BigInt, private_key: &PrivateKeyNum) -> BigInt {
     c.pow(private_key.d) % private_key.n.clone()
 }
 
@@ -194,65 +194,61 @@ mod tests {
         let mut ctx = BigNumContext::new().unwrap();
 
         // 1. Choose two distinct primes p and q
-        let p = BigNum::from_u32(61).unwrap();
-        let q = BigNum::from_u32(53).unwrap();
+        let p = BigNum::from_u32(3).unwrap();
+        let q = BigNum::from_u32(11).unwrap();
 
         // 2. Compute the modulus, n = pq
         // n = 61 * 53 = 3233
         let n = &p * &q;
-        assert_eq!(n, BigNum::from_u32(3233).unwrap());
+        assert_eq!(n, BigNum::from_u32(33).unwrap());
 
         // 3. Compute the totient, t
-        // λ(3233) = lcm(60, 52) = 780
+        // there is no lcm() in openssl (!!!)
+        // https://crypto.stackexchange.com/questions/94926/rsa-private-exponent-generation-according-to-fips-186-4-in-openssl-v1
         // openssl uses Euler's totient function
         // t = (p − 1) * (q − 1)
-        // https://crypto.stackexchange.com/questions/94926/rsa-private-exponent-generation-according-to-fips-186-4-in-openssl-v1
         let one = BigNum::from_u32(1).unwrap();
         let mut p1 = BigNum::new().unwrap();
         p1.checked_sub(&p, &one).unwrap();
         let mut q1 = BigNum::new().unwrap();
         q1.checked_sub(&q, &one).unwrap();
         let t = &p1 * &q1;
-
-        // there is no lcm() in openssl!!!
-        let t = BigNum::from_u32(780).unwrap();
-        assert_eq!(t, BigNum::from_u32(780).unwrap());
+        assert_eq!(t, BigNum::from_u32(20).unwrap());
 
         // 4. Choose any number 1 < e < t that is coprime to t
         // Choosing a prime number for e leaves us only to check that e is not a divisor of t
-        let e =  BigNum::from_u32(17).unwrap();
+        let e =  BigNum::from_u32(7).unwrap();
         let mut gcd = BigNum::new().unwrap();
         gcd.gcd(&e, &t, &mut ctx).unwrap();
         assert_eq!(gcd, BigNum::from_u32(1).unwrap());
 
         // 5. Compute d
-        // 1 = (17 * 413) mod 780
         let mut d = BigNum::new().unwrap();
         d.mod_inverse(&e, &t, &mut ctx).unwrap();
-        assert_eq!(d, BigNum::from_u32(413).unwrap());
+        assert_eq!(d, BigNum::from_u32(3).unwrap());
 
         let n_slice = n.to_vec();
 
-        // 6. public key is (e = 17, n = 3233)
-        let public_key = BnPublicKey { e, n: BigNum::from_slice(&n_slice).unwrap()};
+        // 6. public key is (e = 7, n = 33)
+        let public_key = PublicKeyOpenSslBn { e, n: BigNum::from_slice(&n_slice).unwrap()};
 
-        // 7. private key is (d = 413, n = 3233)
-        let private_key = BnPrivateKey { d, n: BigNum::from_slice(&n_slice).unwrap() };
+        // 7. private key is (d = 3, n = 33)
+        let private_key = PrivateKeyOpenSslBn { d, n: BigNum::from_slice(&n_slice).unwrap() };
 
-        // message, m = 65
-        let m = BigNum::from_u32(65).unwrap();
+        // message, m = 2
+        let m = BigNum::from_u32(2).unwrap();
 
         // 8. encryption
         // c = (m ^ e) mod n
         let mut c = BigNum::new().unwrap();
         c.mod_exp(&m, &public_key.e, &public_key.n, &mut ctx).unwrap();
-        assert_eq!(c.to_string(), "2790");
+        assert_eq!(c.to_string(), "29");
 
         // 9. decryption
         // D = (c ^ d) mod n
         let mut dm = BigNum::new().unwrap();
         dm.mod_exp(&c, &private_key.d, &private_key.n, &mut ctx).unwrap();
-        assert_eq!(dm.to_string(), "65");
+        assert_eq!(dm.to_string(), "2");
 
         assert_eq!(m, dm);
     }
@@ -279,15 +275,16 @@ mod tests {
         assert_eq!(num::integer::gcd(BigInt::from(e), t), BigInt::from(1));
 
         // 5. Compute d
-        // 1 = (17 * 413) mod 780
+        // there is no modular multiplicative inverse function in num crate (!!!)
+        // although, I see related discussions and submits, no such a function yet
         let d = 413;
         assert_eq!(d, 413);
 
         // 6. public key is (e = 17, n = 3233)
-        let public_key = PublicKey { e, n: n.clone() };
+        let public_key = PublicKeyNum { e, n: n.clone() };
 
         // 7. private key is (d = 413, n = 3233)
-        let private_key = PrivateKey { d, n: n.clone() };
+        let private_key = PrivateKeyNum { d, n: n.clone() };
 
         // message, m = 65
         let m = BigInt::from(65);
