@@ -47,7 +47,7 @@ The numbers p, q, and d must be kept secret
 The encryption of the plaintext message, m
 
 ```text
-    c = (m ^ e) mod n
+c = (m ^ e) mod n
 ```
 
 ## Decryption
@@ -55,5 +55,5 @@ The encryption of the plaintext message, m
 The decryption of the ciphertext, c
 
 ```text
-    D = (c ^ d) mod n
+D = (c ^ d) mod n
 ```
