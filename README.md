@@ -2,11 +2,9 @@
 
 Samples of RSA (Rivest–Shamir–Adleman) public-key cryptosystem implementations for learning purposes
 
-## Test samples by using
-
-- [rug](https://crates.io/crates/rug) - a high-level interface to the wrapper over [GMP](https://gmplib.org/), a well known arbitrary precision arithmetic library
-- [openssl](https://crates.io/crates/openssl) - a safe interface to the popular [OpenSSL library](https://www.openssl.org/)
-- [num](https://crates.io/crates/num) - A collection of numeric types and traits in pure Rust
+- [src/rsa_gmp.rs](src/rsa_gmp.rs) - uses a [rug](https://crates.io/crates/rug), a high-level interface to the wrapper over [GNU MP / GMP](https://gmplib.org/), a well known arbitrary precision arithmetic library
+- [src/rsa_openssl_bn.rs](src/rsa_openssl_bn.rs) - uses an [openssl](https://crates.io/crates/openssl), a safe interface to the popular [OpenSSL library](https://www.openssl.org/)
+- [src/rsa_num.rs](src/rsa_num.rs) - uses a [num](https://crates.io/crates/num), a collection of numeric types and traits in pure Rust
 
 ## Key generation
 
