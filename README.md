@@ -2,6 +2,12 @@
 
 A sample implementation of RSA (Rivest–Shamir–Adleman) public-key cryptosystem for learning purposes
 
+## Test implementation samples by using
+
+- [rug](https://crates.io/crates/rug) - a high-level interface to the wrapper over [GMP,  a well known arbitrary precision arithmetic library](https://gmplib.org/)
+- [openssl](https://crates.io/crates/openssl) - a safe interface to the popular [OpenSSL library](https://www.openssl.org/)
+- [num](https://crates.io/crates/num) - A collection of numeric types and traits in pure Rust
+
 ## Key generation
 
 ```text
@@ -14,10 +20,11 @@ A sample implementation of RSA (Rivest–Shamir–Adleman) public-key cryptosyst
         φ(n) = (p − 1) * (q − 1)
         which outputs the amount of numbers that are coprime to n
     - Carmichael function is recommended for modern RSA-based cryptosystems
-        https://en.wikipedia.org/wiki/Carmichael_function
         also known as reduced totient function or least universal exponent function
+        https://en.wikipedia.org/wiki/Carmichael_function
         λ(n) = lcm(p − 1, q − 1)
-        where lcm() is the least common multiple: https://en.wikipedia.org/wiki/Least_common_multiple
+        where lcm() is the least common multiple:
+        https://en.wikipedia.org/wiki/Least_common_multiple
 
 4. Choose a public key exponent, integer e (usually 65537 = 0x010001)
     1 < e < t and gcd(t, e) = 1
