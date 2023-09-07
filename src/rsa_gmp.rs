@@ -23,31 +23,24 @@ pub fn generate_keys(_key_len: usize) -> (PublicKey, PrivateKey) {
         let q = Integer::from(53);
 
         // 2. Compute the modulus, n = pq
-        // n = 61 * 53 = 3233
         let n = p.clone() * q.clone();
-        assert_eq!(n, 3233);
 
         // 3. Compute the totient, t
-        // λ(3233) = lcm(60, 52) = 780
         let p1 = p.clone() - Integer::from(1);
         let q1 = q.clone() - Integer::from(1);
         let t = p1.lcm(&q1);
-        assert_eq!(t, 780);
 
         // 4. Choose any number 1 < e < t that is coprime to t
         // Choosing a prime number for e leaves us only to check that e is not a divisor of t
         let e =  Integer::from(17);
-        assert_eq!(e.clone().gcd(&t), 1);
 
         // 5. Compute d
-        // 1 = (17 * 413) mod 780
         let d = e.clone().invert(&t).unwrap();
-        assert_eq!(d, 413);
 
-        // 6. public key is (e = 17, n = 3233)
+        // 6. public key is (e, n)
         let public_key = PublicKey { e, n: n.clone() };
 
-        // 7. private key is (d = 413, n = 3233)
+        // 7. private key is (d, n)
         let private_key = PrivateKey { d, n: n.clone() };
 
         (public_key, private_key)
