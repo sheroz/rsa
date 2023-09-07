@@ -83,4 +83,4 @@ D = (c ^ d) mod n
 ## References
 
 - [RSA in Wikipedia](https://en.wikipedia.org/wiki/RSA_(cryptosystem))
-- [FIPS.186-4, Key Pair Generation](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf#page=62)
+- [FIPS 186-4, Key Pair Generation](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf#page=62)
