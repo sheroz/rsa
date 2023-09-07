@@ -40,7 +40,7 @@ Samples of RSA (Rivest–Shamir–Adleman) public-key cryptosystem implementatio
    φ(n) = (p − 1) * (q − 1)
    ```
 
-   which outputs the amount of numbers that are coprime to n
+   which outputs the amount of numbers that are coprime to `n`
 
 - [Carmichael function](https://en.wikipedia.org/wiki/Carmichael_function) is recommended for modern RSA-based cryptosystems, also known as `reduced totient function` or `least universal exponent function`
 
