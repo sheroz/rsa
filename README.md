@@ -10,6 +10,22 @@ Samples of RSA (Rivest–Shamir–Adleman) public-key cryptosystem implementatio
 
 1. Choose two distinct primes p and q
 
+   FIPS.186-4, Section: B.3.1 Criteria for IFC Key Pairs
+
+   ```text
+   sqrt(2)*2^((nlen/2)-1) <= p <= 2^(nlen/2)-1
+
+   sqrt(2)*2^((nlen/2)-1) <= q <= 2^(nlen/2)-1
+
+   |p - q| > 2^((nlen/2)-100)  
+   ```
+
+   where:
+
+   `^` is an exponentiation (power) arithmetic operation
+
+   `nlen` is the appropriate length for the desired security strength
+
 2. Compute the modulus
 
    ```text
