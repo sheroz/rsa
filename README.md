@@ -1,6 +1,6 @@
 # RSA (Rivest–Shamir–Adleman) asymmetric cipher in Rust
 
-A sample implementation of RSA (Rivest–Shamir–Adleman) public-key cryptosystem for learning purposes
+Samples of RSA (Rivest–Shamir–Adleman) public-key cryptosystem implementations for learning purposes
 
 ## Test implementation samples by using
 
