@@ -36,7 +36,7 @@ Samples of RSA (Rivest–Shamir–Adleman) public-key cryptosystem implementatio
 
    where lcm() is the [least common multiple](https://en.wikipedia.org/wiki/Least_common_multiple)
 
-4. Choose a public key exponent, integer e (usually 65537 decimal, or 0x010001 in hex)
+4. Choose a public key exponent, integer e (usually 65537 in decimal, or 0x010001 in hex)
 
    ```text
    1 < e < t
