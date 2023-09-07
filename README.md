@@ -19,7 +19,9 @@ Samples of RSA (Rivest–Shamir–Adleman) public-key cryptosystem implementatio
     - Euler's totient function is used in the original RSA
         φ(n) = (p − 1) * (q − 1)
         which outputs the amount of numbers that are coprime to n
-    - Carmichael function is recommended for modern RSA-based cryptosystems, also known as reduced totient function or least universal exponent function: https://en.wikipedia.org/wiki/Carmichael_function
+    - Carmichael function is recommended for modern RSA-based cryptosystems,
+        also known as reduced totient function or
+        least universal exponent function: https://en.wikipedia.org/wiki/Carmichael_function
         λ(n) = lcm(p − 1, q − 1)
         where lcm() is the least common multiple: https://en.wikipedia.org/wiki/Least_common_multiple
 
