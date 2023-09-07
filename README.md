@@ -8,7 +8,7 @@ Samples of RSA (Rivest–Shamir–Adleman) public-key cryptosystem implementatio
 
 ## Key generation
 
-1. Choose two distinct primes p and q
+1. Choose two distinct primes `p` and `q`
 
    FIPS.186-4, Section: B.3.1 Criteria for IFC Key Pairs
 
@@ -26,15 +26,15 @@ Samples of RSA (Rivest–Shamir–Adleman) public-key cryptosystem implementatio
 
    `nlen` is the appropriate length for the desired security strength
 
-2. Compute the modulus
+2. Compute the modulus, `n`
 
    ```text
    n = p * q
    ```
 
-3. Compute the totient, t
+3. Compute the totient, `t`
 
-- Euler's totient function is used in the original RSA
+- `Euler's totient function` is used in the original RSA
 
    ```text
    φ(n) = (p − 1) * (q − 1)
@@ -42,22 +42,22 @@ Samples of RSA (Rivest–Shamir–Adleman) public-key cryptosystem implementatio
 
    which outputs the amount of numbers that are coprime to n
 
-- [Carmichael function](https://en.wikipedia.org/wiki/Carmichael_function) is recommended for modern RSA-based cryptosystems, also known as reduced totient function or least universal exponent function
+- [Carmichael function](https://en.wikipedia.org/wiki/Carmichael_function) is recommended for modern RSA-based cryptosystems, also known as `reduced totient function` or `least universal exponent function`
 
    ```text
    λ(n) = lcm(p − 1, q − 1)
    ```
 
-   where lcm() is the [least common multiple](https://en.wikipedia.org/wiki/Least_common_multiple)
+   where `lcm()` is the [least common multiple](https://en.wikipedia.org/wiki/Least_common_multiple)
 
-4. Choose a public key exponent, integer e (usually 65537 in decimal, or 0x010001 in hex)
+4. Choose a public key exponent, integer `e` (usually `65537` in decimal, or `0x010001` in hex)
 
    ```text
    1 < e < t
    gcd(t, e) = 1
    ```
 
-5. Compute the [modular multiplicative inverse](https://en.wikipedia.org/wiki/Modular_multiplicative_inverse), d
+5. Compute the [modular multiplicative inverse](https://en.wikipedia.org/wiki/Modular_multiplicative_inverse), `d`
 
    ```text
    d = (e ^ (−1)) mod t
@@ -76,11 +76,11 @@ Samples of RSA (Rivest–Shamir–Adleman) public-key cryptosystem implementatio
    (d, n)
    ```
 
-The numbers p, q, and d must be kept secret
+The numbers `p`, `q`, and `d` must be kept secret
 
 ## Encryption
 
-The encryption of the plaintext message, m
+The encryption of the plaintext message, `m`
 
 ```text
 c = (m ^ e) mod n
@@ -88,7 +88,7 @@ c = (m ^ e) mod n
 
 ## Decryption
 
-The decryption of the ciphertext, c
+The decryption of the ciphertext, `c`
 
 ```text
 D = (c ^ d) mod n
