@@ -39,14 +39,14 @@ Samples of RSA (Rivest–Shamir–Adleman) public-key cryptosystem implementatio
 4. Choose a public key exponent, integer e (usually 65537 = 0x010001)
 
    ```text
-   1 < e < t and gcd(t, e) = 1
+   1 < e < t
+   gcd(t, e) = 1
    ```
 
 5. Compute the [modular multiplicative inverse](https://en.wikipedia.org/wiki/Modular_multiplicative_inverse), d
 
    ```text
    d = (e ^ (−1)) mod t
-   or
    1 = (d * e) mod t
    ```
 
