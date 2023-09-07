@@ -80,7 +80,7 @@ The decryption of the ciphertext, c
 D = (c ^ d) mod n
 ```
 
-## Useful links
+## References
 
-- [RSA in Wiki](https://en.wikipedia.org/wiki/RSA_(cryptosystem))
+- [RSA in Wikipedia](https://en.wikipedia.org/wiki/RSA_(cryptosystem))
 - [FIPS.186-4, Key Pair Generation](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf#page=62)
