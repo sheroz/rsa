@@ -2,7 +2,7 @@
 
 Samples of RSA (Rivest–Shamir–Adleman) public-key cryptosystem implementations for learning purposes
 
-## Test implementation samples by using
+## Test samples by using
 
 - [rug](https://crates.io/crates/rug) - a high-level interface to the wrapper over [GMP](https://gmplib.org/), a well known arbitrary precision arithmetic library
 - [openssl](https://crates.io/crates/openssl) - a safe interface to the popular [OpenSSL library](https://www.openssl.org/)
