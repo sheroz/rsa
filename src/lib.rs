@@ -224,6 +224,7 @@ mod tests {
 
     }
 
+    #[test]
     fn wiki_sample_rsa_openssl_bn() {
         let mut ctx = BigNumContext::new().unwrap();
 
