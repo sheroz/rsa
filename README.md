@@ -1,4 +1,4 @@
-# RSA (Rivest–Shamir–Adleman) asymmetric cipher in Rust
+# RSA (Rivest–Shamir–Adleman) Asymmetric Cipher in Rust
 
 Samples of RSA (Rivest–Shamir–Adleman) public-key cryptosystem implementations for learning purposes
 
