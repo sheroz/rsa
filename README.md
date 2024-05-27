@@ -94,6 +94,10 @@ The decryption of the ciphertext, `c`
 D = (c ^ d) mod n
 ```
 
+### Disclaimer
+
+This project was created for research purposes and is not intended for use in production systems.
+
 ## References
 
 - [RSA in Wikipedia](https://en.wikipedia.org/wiki/RSA_(cryptosystem))
